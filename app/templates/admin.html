@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<div class="admin_interviewer">
+    <h1>Interviewers</h1>
+    <form method="POST" action={{ url_for("main.add_interviewer") }}>
+        <input type="text" name="interviewer_name" placeholder="Name">
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+
+<div class="admin_candidate">
+    <h1>Candidates</h1>
+    <form method="POST" action={{ url_for("main.add_candidate") }}>
+        <input type="text" name="candidate_name" placeholder="Name">
+        <button type="submit">Add</button>
+    </form>
+</div>
+
+</body>
+</html>
