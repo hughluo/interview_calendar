@@ -25,7 +25,7 @@
       |- admin.html            a simple admin interface
     |- config.py                  
     |- test.py 	           a unit test, it can help you to understand the usage of APIs. 
-                                  (Pls Run the app/__init__.py first!)                              
+                                  (Please run the app/__init__.py first!)                              
     |- utils.py                   storage utilities functions
 
 
