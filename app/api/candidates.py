@@ -3,8 +3,7 @@ from app.models.candidate import Candidate
 from app.models.interviewer import Interviewer
 from app.api import api, api_encoder, api_decoder
 from app.api.error import bad_request
-from utils import is_slot_legal, datetime2epoch
-from datetime import datetime
+from utils import is_slot_legal, log
 
 
 @api.route("/candidates/<int:cid>/slots", methods=["POST"])

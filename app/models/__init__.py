@@ -5,6 +5,11 @@ db = client.calender
 
 
 def get_next_id(name):
+    """
+    Get the next id via a collection named 'data_id' to track the current id of document in given collection
+    :param name: name of collection
+    :return: the next id of document
+    """
     query = {
         'name': name,
     }
@@ -25,7 +30,10 @@ def get_next_id(name):
     return next_id
 
 
+# we try to use object-relational mapping here
 class Model(object):
+    # __fields__ is a list of fields a model instance should contain
+    #  (field, type, default value)
     __fields__ = [
         '_id',
         ('id', int, -1),
@@ -37,6 +45,9 @@ class Model(object):
 
     @classmethod
     def new(cls, form=None, **kwargs):
+        """
+        Instead of using __init__ to create instance, we use the class method new here
+        """
         # cname stands for collection name
         cname = cls.__name__
         m = cls()
@@ -72,7 +83,7 @@ class Model(object):
     @classmethod
     def _new_with_bson(cls, bson):
         """
-        Retrieve a model from mongodb
+        Retrieve a object from mongodb document
         """
         m = cls()
         fields = cls.__fields__.copy()
@@ -102,7 +113,6 @@ class Model(object):
         use pymongo to query
         """
         name = cls.__name__
-        # TODO filter d that marked as deleted
         flag_sort = '__sort'
         sort = kwargs.pop(flag_sort, None)
         ds = db[name].find(kwargs)
@@ -113,9 +123,7 @@ class Model(object):
 
     @classmethod
     def find_one(cls, **kwargs):
-        # kwargs['deleted'] = False
         dl = cls._find(**kwargs)
-        # print('find one debug', kwargs, l)
         if len(dl) > 0:
             return dl[0]
         else:
@@ -134,6 +142,9 @@ class Model(object):
 
     @classmethod
     def check_all_existence_by_id(cls, ids):
+        """
+        Check the existence of ids in a list
+        """
         for id in ids:
             if not cls.check_existence_by_id(id):
                 return False

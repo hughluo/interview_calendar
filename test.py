@@ -8,16 +8,11 @@ import requests
 import json
 
 
-def pprint_matching(ms):
-    for m in ms:
-        print('From {} to {}, Candidate id: {}, Interviewer id: {}'.format(epoch2datetime(m['t_start']), epoch2datetime(m['t_end']), m['cid'], m['iids']))
-
-
+# in this test case, we use requests to simulate api consume.
 class TestClassMethod(unittest.TestCase):
     def test_setup(self):
         client = MongoClient()
         client.drop_database('calender')
-        db = client.calender
 
         Candidate.new(name='C1')
         Interviewer.new(name='I1')
@@ -70,7 +65,6 @@ class TestClassMethod(unittest.TestCase):
         querystring4 = {"t_from": et1, "t_to": et8}
         response4 = requests.request("POST", url, headers=headers, params=querystring4)
         self.assertEqual(response4.status_code, 400)
-
 
     def test_add_slot_i(self):
         dt1 = datetime(2018, 8, 8, 8)

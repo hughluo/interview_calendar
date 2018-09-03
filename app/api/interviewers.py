@@ -2,7 +2,7 @@ from flask import request
 from app.models.interviewer import Interviewer
 from app.api import api, api_encoder
 from app.api.error import bad_request
-from utils import is_slot_legal
+from utils import is_slot_legal, log
 
 
 @api.route("/interviewers/<int:iid>/slots", methods=["POST"])

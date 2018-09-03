@@ -42,7 +42,7 @@ class Candidate(Model):
             ct = int(c_s.get('t_to', -1))
             cf = int(c_s.get('t_from', -1))
             p = ct - cf
-            ns = p // 3600  # how many hours with a candidates slot
+            ns = p // 3600  # how many hours within a candidates slot
 
             for i in range(ns):
                 s_s = cf + i * 3600  # start time of a interview slot
@@ -55,7 +55,7 @@ class Candidate(Model):
                     for i_s in i_ss:
                         ivt = i_s.get('t_to', -1)
                         ivf = i_s.get('t_from', -1)
-                        if ivf <= s_s and ivt >= s_e:
+                        if ivf <= s_s and ivt >= s_e:  # True if a interviewer is available in given slot
                             ivs.append(iid)
 
                 if len(ivs) > 0:  # which means we have at least one interviewer who is available
@@ -72,68 +72,6 @@ class Candidate(Model):
     def del_all_slots_by_id(cls, cid):
         ss = []
         cls.find_by_id_and_update(cid, slots=ss)
-
-
-
-    # @classmethod
-    # def get_matching_by_id_old(cls, cid, iids):
-    #     ms = []
-    #     c_slots = cls.get_slots_by_id(cid)
-    #     for c_s in c_slots:
-    #         cf = c_s.t_from
-    #         ct = c_s.t_to
-    #         for iid in iids:
-    #             i_slots = Interviewer.get_slots_by_id(iid)
-    #             for i_s in i_slots:
-    #                 ivf = i_s.t_from
-    #                 ivt = i_s.t_to
-    #                 if max(cf, ivf) - min(ct, ivt) >= 3600:
-    #                     m = {
-    #                         't_from': max(cf, ivf),
-    #                         't_to': min(ct, ivt),
-    #                         'interviewer': iid,
-    #                          }
-    #                     ms.append(m)
-
-
-
-
-    # @classmethod
-    # def auto_match_by_id(cls, id):
-    #     """
-    #     Return a list of interviewers who match the slots of given candidate
-    #     """
-    #     ms = []
-    #     c_slots = cls.get_slots_by_id(id)
-    #     ivs = Interviewer.all()
-    #     for s in c_slots:
-    #         cf = s.t_from
-    #         ct = s.t_to
-    #         for iv in ivs:
-    #             for s in iv.slots:
-    #                 ivf = s.t_from
-    #                 ivt = s.t_to
-    #                 # if they have shared time period bigger than 3600 seconds, it's a matching
-    #                 if max(cf, ivf) - min(ct, ivt) >= 3600:
-    #                     m = {
-    #                         't_from': max(cf, ivf),
-    #                         't_to': min(ct, ivt),
-    #                         'interviewer': iv.id,
-    #                     }
-    #                     ms.append(m)
-    #     for m in ms:
-    #         # TODO matching interviewer with each other here...
-    #         pass
-
-    @classmethod
-    def find_by_name(cls, name):
-        """
-        Return a Candidate obj by name filtering
-
-        :param name: name of candidate
-        :return: Candidate obj
-        """
-        pass
 
 
 

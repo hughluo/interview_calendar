@@ -4,7 +4,7 @@ from app.models.candidate import Candidate
 from app.models.interviewer import Interviewer
 
 
-# admin enable some gui control of adding candidates and interviewers
+# just for convenience. A route for adding new Candidates and Interviewer
 
 @main.route('/admin')
 def admin():
