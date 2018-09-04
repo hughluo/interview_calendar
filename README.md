@@ -6,7 +6,7 @@ A Flask + Mongodb based interview calendar that has following features:
 * set slots for both candidates & interviewers via API
 * query for interview slots matching via API
 
-Please refer to api documents under the directory api_doc/ for more details
+Please refer to api documents under the directory api_doc/ for more details.
 
 
 
