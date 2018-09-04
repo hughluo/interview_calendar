@@ -6,8 +6,10 @@
 
 
 
-#### |- interview_calender/
-    |- venv           
+ ### |- interview_calender/
+    |- api_doc
+    	|- add_slot.md         api document about adding slot for both candidate and interviewer
+	|- matching.md	       api document about get matching result
 	|- app/
 	  |- api/      
         |- __init__.py         run the server to test by running this, it should be run at localhost:5000
@@ -27,5 +29,4 @@
     |- test.py 	           a unit test, it can help you to understand the usage of APIs. 
                                   (Please run the app/__init__.py first!)                              
     |- utils.py                   storage utilities functions
-
 
