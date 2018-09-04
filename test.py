@@ -8,18 +8,24 @@ import requests
 import json
 
 
+def initialize4test():
+    """
+    Drop database and add candidates & interviewers for test purpose
+    """
+    client = MongoClient()
+    client.drop_database('calender')
+    Candidate.new(name='C1')
+    Interviewer.new(name='I1')
+    Interviewer.new(name='I2')
+    Interviewer.new(name='I3')
+
+
 # in this test case, we use requests to simulate api consume.
 class TestClassMethod(unittest.TestCase):
-    def test_setup(self):
-        client = MongoClient()
-        client.drop_database('calender')
-
-        Candidate.new(name='C1')
-        Interviewer.new(name='I1')
-        Interviewer.new(name='I2')
-        Interviewer.new(name='I3')
-
     def test_add_slot_c(self):
+
+        initialize4test()
+
         dt1 = datetime(2018, 8, 8, 8)
         dt2 = datetime(2018, 9, 9, 9)
         dt3 = datetime(2018, 9, 9, 10)
@@ -67,6 +73,8 @@ class TestClassMethod(unittest.TestCase):
         self.assertEqual(response4.status_code, 400)
 
     def test_add_slot_i(self):
+        initialize4test()
+
         dt1 = datetime(2018, 8, 8, 8)
         dt2 = datetime(2018, 9, 9, 9)
         dt3 = datetime(2018, 9, 9, 10)
@@ -115,6 +123,9 @@ class TestClassMethod(unittest.TestCase):
         self.assertEqual(response3.content, rse3)
 
     def test_matching(self):
+
+        initialize4test()
+
         dt1 = datetime(2018, 8, 8, 8)
         dt2 = datetime(2018, 9, 9, 9)
         dt3 = datetime(2018, 9, 9, 10)
@@ -128,17 +139,39 @@ class TestClassMethod(unittest.TestCase):
         et4 = datetime2epoch(dt4)
         et5 = datetime2epoch(dt5)
         et8 = datetime2epoch(dt8)
-        print(Candidate.get_matching_by_id(1, [1, 2, 3]))
 
-        # matching test1
-        m1 = Candidate.get_matching_by_id(1, [1])
+        Candidate.add_slot_by_id(1, et2, et5)
+        Interviewer.add_slot_by_id(1, et2, et3)
+        Interviewer.add_slot_by_id(2, et2, et4)
+        Interviewer.add_slot_by_id(3, et3, et5)
+
+        url1 = "http://localhost:5000/api/candidates/1/matching"
+        querystring1 = {"iids":"[1]"}
+        headers1 = {
+            'Cache-Control': "no-cache",
+            'Postman-Token': "fc7bc0ff-37d9-4175-a234-6111685758f4"
+            }
+        response1 = requests.request("GET", url1, headers=headers1, params=querystring1)
+        m1_raw = response1.content.decode('ascii')
+        m1 = json.loads(m1_raw)
+
         self.assertEqual(m1[0]['t_start'], et2)
         self.assertEqual(m1[0]['t_end'], et3)
         self.assertEqual(m1[0]['cid'], 1)
         self.assertEqual(m1[0]['iids'][0], 1)
 
         # matching test2
-        m2 = Candidate.get_matching_by_id(1, [1, 2, 3])
+
+        url2 = "http://localhost:5000/api/candidates/1/matching"
+        querystring2 = {"iids":"[1, 2, 3]"}
+        headers2 = {
+            'Cache-Control': "no-cache",
+            'Postman-Token': "fc7bc0ff-37d9-4175-a234-6111685758f4"
+            }
+        response2 = requests.request("GET", url2, headers=headers2, params=querystring2)
+        m2_raw = response2.content.decode('ascii')
+        m2 = json.loads(m2_raw)
+
         self.assertEqual(m2[0]['t_start'], et2)
         self.assertEqual(m2[0]['t_end'], et3)
         self.assertEqual(m2[0]['iids'][0], 1)

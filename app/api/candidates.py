@@ -34,6 +34,9 @@ def get_matching_for_candidate(cid):
                 ms = Candidate.get_matching_by_id(cid, iids)
                 print(ms)
                 return api_encoder(ms)
+    else:
+        return bad_request('Candidate not exists')
+
     return bad_request('Iids is illegal')
 
 
