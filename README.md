@@ -8,8 +8,8 @@
 
  ### |- interview_calender/
     |- api_doc
-    	|- add_slot.md         api document about adding slot for both candidate and interviewer
-	|- matching.md	       api document about get matching result
+      |- add_slot.md         api document about adding slot for both candidate and interviewer
+      |- matching.md	       api document about get matching result
 	|- app/
 	  |- api/      
         |- __init__.py         run the server to test by running this, it should be run at localhost:5000
