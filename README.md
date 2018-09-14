@@ -20,7 +20,7 @@ Please refer to api documents under the directory api_doc/ for more details.
       |- matching.md	   api document about get matching result
 	|- app/
 	  |- api/      
-        |- __init__.py         run the server to test by running this, it should be run at localhost:5000
+        |- __init__.py         start the server, it should run at localhost:5000
         |- error.py            route for api error handlers
         |- candidates.py       route for candidates relative APIs: add slot and get matching result
         |- interviewers.py     route for interviewers relative APIs: add slot
