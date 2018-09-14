@@ -1,9 +1,9 @@
 ### Usage
 
-`POST localhost:5000/api/interviewers/<int: iid>/slots
+`POST localhost:5000/api/interviewers/<int:iid>/slots
 `
 
-`POST localhost:5000/api/candidates/<int: cid>/slots
+`POST localhost:5000/api/candidates/<int:cid>/slots
 `
 
 This is a doc about adding slots for interviewers,
