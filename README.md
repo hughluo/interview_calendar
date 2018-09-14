@@ -30,7 +30,7 @@ Please refer to api documents under the directory api_doc/ for more details.
     |- models/
       |- __init__.py           base Class Models, parent class of Candidate and Interviewer
       |- candidate.py          class Candidate
-      |- interviewer.py        class Candidate
+      |- interviewer.py        class Interviewer
     |- templates/
       |- admin.html            a simple admin interface
     |- config.py                 
