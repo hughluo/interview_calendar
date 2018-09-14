@@ -32,10 +32,10 @@ Please refer to api documents under the directory api_doc/ for more details.
       |- candidate.py          class Candidate
       |- interviewer.py        class Interviewer
     |- templates/
-      |- admin.html            a simple admin interface
+      |- admin.html            a simple admin interface to add candidate and interviewer
     |- config.py                 
     |- utils.py                storage utilities functions
-    |- test.py 	           a unit test, it can help you to understand the usage of APIs. 
+    |- test.py 	           a unit test, it should help you to understand the usage of APIs. 
                                   (Please run the app/__init__.py first!)                              
  
 
